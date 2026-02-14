@@ -1,0 +1,121 @@
+/**
+ * Auth Context for managing user session
+ * Uses React Context + Supabase client
+ */
+
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import type { User, Session } from "@supabase/supabase-js";
+import { supabaseClient } from "@/db/supabase.client";
+import { apiClient } from "@/lib/api-client";
+import { clearAllCache } from "@/lib/cache-utils";
+import type { UserProfileDTO } from "@/types/types";
+
+interface AuthContextValue {
+  user: User | null;
+  profile: UserProfileDTO | null;
+  session: Session | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<UserProfileDTO | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch user profile from API
+  const fetchProfile = async () => {
+    try {
+      // apiClient.get extracts data from { success, data, timestamp }
+      // API returns { user: UserProfileDTO } in data
+      const data = await apiClient.get<{ user: UserProfileDTO }>(
+        "/api/users/me",
+      );
+      setProfile(data.user || null);
+    } catch {
+      // Silent fail - profile will remain null
+      setProfile(null);
+    }
+  };
+
+  // Refresh profile data
+  const refreshProfile = async () => {
+    if (user) {
+      await fetchProfile();
+    }
+  };
+
+  // Sign out
+  const signOut = async () => {
+    await supabaseClient.auth.signOut();
+    setUser(null);
+    setProfile(null);
+    setSession(null);
+
+    // Clear all cached data on logout (GDPR-ready)
+    clearAllCache();
+  };
+
+  // Initialize auth state
+  useEffect(() => {
+    // Get initial session
+    supabaseClient.auth.getSession().then(async ({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        await fetchProfile();
+      }
+      setIsLoading(false);
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        await fetchProfile();
+      } else {
+        setProfile(null);
+      }
+      setIsLoading(false); // Mark loading complete after auth state change
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const value: AuthContextValue = {
+    user,
+    profile,
+    session,
+    isLoading,
+    isAuthenticated: !!user,
+    signOut,
+    refreshProfile,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+/**
+ * Hook to use auth context
+ */
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
+  return context;
+}

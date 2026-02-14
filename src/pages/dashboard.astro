@@ -1,0 +1,13 @@
+---
+/**
+ * Dashboard Page
+ * Main authenticated view - shows subscription status and premium features
+ * Protected route - requires authentication
+ */
+import Layout from "@/layouts/Layout.astro";
+import { DashboardPageWrapper } from "@/components/dashboard/DashboardPageWrapper";
+---
+
+<Layout title="Dashboard - Core Starter">
+  <DashboardPageWrapper client:load />
+</Layout>
