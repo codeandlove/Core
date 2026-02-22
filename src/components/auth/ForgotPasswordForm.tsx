@@ -66,10 +66,10 @@ export function ForgotPasswordForm() {
 
   if (success) {
     return (
-      <div className="rounded-lg border bg-white p-8 shadow-sm">
+      <div className="rounded-lg border bg-card p-8 shadow-sm">
         <div
           role="alert"
-          className="rounded-md bg-green-50 border border-green-200 p-4 text-sm text-green-800"
+          className="rounded-md border border-green-600/20 bg-green-600/10 p-4 text-sm text-green-700 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
         >
           <p className="font-medium">Email wysłany!</p>
           <p className="mt-1">
@@ -82,12 +82,12 @@ export function ForgotPasswordForm() {
   }
 
   return (
-    <div className="rounded-lg border bg-white p-8 shadow-sm">
+    <div className="rounded-lg border bg-card p-8 shadow-sm">
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-foreground mb-2"
           >
             Email
           </label>
@@ -102,7 +102,7 @@ export function ForgotPasswordForm() {
             aria-describedby={validationError ? "email-error" : undefined}
             aria-invalid={!!validationError}
             className={`block w-full rounded-md border px-3 py-2 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
-              validationError ? "border-red-500" : "border-gray-300"
+              validationError ? "border-red-500" : "border-input"
             }`}
             placeholder="twoj@email.com"
             disabled={isLoading}

@@ -79,12 +79,12 @@ export function ResetPasswordForm() {
   };
 
   return (
-    <div className="rounded-lg border bg-white p-8 shadow-sm">
+    <div className="rounded-lg border bg-card p-8 shadow-sm">
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-foreground mb-2"
           >
             Nowe hasło
           </label>
@@ -103,12 +103,12 @@ export function ResetPasswordForm() {
             }
             aria-invalid={!!validationErrors.password}
             className={`block w-full rounded-md border px-3 py-2 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
-              validationErrors.password ? "border-red-500" : "border-gray-300"
+              validationErrors.password ? "border-red-500" : "border-input"
             }`}
             placeholder="Minimum 8 znaków"
             disabled={isLoading}
           />
-          <p id="password-help" className="mt-1 text-xs text-gray-500">
+          <p id="password-help" className="mt-1 text-xs text-muted-foreground">
             Minimum 8 znaków
           </p>
           {validationErrors.password && (
@@ -125,7 +125,7 @@ export function ResetPasswordForm() {
         <div>
           <label
             htmlFor="password-confirm"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-foreground mb-2"
           >
             Potwierdź hasło
           </label>
@@ -146,7 +146,7 @@ export function ResetPasswordForm() {
             className={`block w-full rounded-md border px-3 py-2 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
               validationErrors.passwordConfirm
                 ? "border-red-500"
-                : "border-gray-300"
+                : "border-input"
             }`}
             placeholder="Powtórz hasło"
             disabled={isLoading}

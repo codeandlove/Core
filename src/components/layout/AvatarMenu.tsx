@@ -58,7 +58,7 @@ export function AvatarMenu() {
             />
 
             {/* Dropdown */}
-            <div className="absolute right-0 top-full z-50 mt-2 w-64 rounded-md border bg-white p-2 shadow-lg">
+            <div className="absolute right-0 top-full z-50 mt-2 w-64 rounded-md border bg-popover p-2 shadow-lg">
               {/* User info */}
               <div className="border-b px-3 py-3">
                 <p className="text-sm font-medium">{displayName}</p>

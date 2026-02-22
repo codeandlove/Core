@@ -74,5 +74,13 @@ export default defineConfig({
       },
       fullyParallel: false,
     },
+    {
+      name: "theme-tests",
+      testMatch: /theme\.spec/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+      fullyParallel: true,
+    },
   ],
 });

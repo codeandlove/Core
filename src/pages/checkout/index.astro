@@ -6,6 +6,7 @@
 
 import Layout from "@/layouts/Layout.astro";
 import CheckoutLoader from "@/components/checkout/CheckoutLoader";
+import { CheckoutPageThemeWrapper } from "@/components/checkout/CheckoutPageThemeWrapper";
 
 // Middleware ensures user is authenticated and sets locals.user
 // Get default plan from config
@@ -16,11 +17,13 @@ const pageTitle = "Przejdź do płatności - Core Starter";
 ---
 
 <Layout title={pageTitle}>
-  <main
-    class="container mx-auto flex min-h-screen items-center justify-center px-4 py-12"
-  >
-    <div class="w-full max-w-md">
-      <CheckoutLoader client:only="react" priceId={defaultPlan.price_id} />
-    </div>
-  </main>
+  <CheckoutPageThemeWrapper client:load>
+    <main
+      class="container mx-auto flex min-h-screen items-center justify-center px-4 py-12"
+    >
+      <div class="w-full max-w-md">
+        <CheckoutLoader client:only="react" priceId={defaultPlan.price_id} />
+      </div>
+    </main>
+  </CheckoutPageThemeWrapper>
 </Layout>

@@ -327,7 +327,7 @@ export function AuthForm({ mode, returnUrl = "/dashboard" }: AuthFormProps) {
   };
 
   return (
-    <div className="rounded-lg border bg-white p-6 shadow-sm">
+    <div className="rounded-lg border bg-card p-6 shadow-sm">
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         {/* Email field */}
         <div>
@@ -341,7 +341,7 @@ export function AuthForm({ mode, returnUrl = "/dashboard" }: AuthFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={`mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary ${
-              validationErrors.email ? "border-red-500" : "border-gray-300"
+              validationErrors.email ? "border-red-500" : "border-input"
             }`}
             placeholder="twoj@email.pl"
             autoComplete="email"
@@ -371,7 +371,7 @@ export function AuthForm({ mode, returnUrl = "/dashboard" }: AuthFormProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={`mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary ${
-              validationErrors.password ? "border-red-500" : "border-gray-300"
+              validationErrors.password ? "border-red-500" : "border-input"
             }`}
             placeholder="••••••••"
             autoComplete={
@@ -421,7 +421,7 @@ export function AuthForm({ mode, returnUrl = "/dashboard" }: AuthFormProps) {
               className={`mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary ${
                 validationErrors.confirmPassword
                   ? "border-red-500"
-                  : "border-gray-300"
+                  : "border-input"
               }`}
               placeholder="••••••••"
               autoComplete="new-password"
@@ -447,8 +447,11 @@ export function AuthForm({ mode, returnUrl = "/dashboard" }: AuthFormProps) {
 
         {/* Error message */}
         {error && (
-          <div className="rounded-md bg-red-50 p-3" role="alert">
-            <p className="text-sm text-red-800">{error}</p>
+          <div
+            className="rounded-md border border-red-600/20 bg-red-600/10 p-3 text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-400"
+            role="alert"
+          >
+            <p className="text-sm">{error}</p>
           </div>
         )}
 

@@ -5,241 +5,230 @@
  */
 import Layout from "@/layouts/Layout.astro";
 import { Button } from "@/components/ui/button";
+import { LandingPageWrapper } from "@/components/layout/LandingPageWrapper";
 ---
 
 <Layout title="Core Starter - Production-Ready SaaS Foundation">
-  <div class="flex min-h-screen flex-col">
-    <!-- Header -->
-    <header class="border-b">
-      <div
-        class="container mx-auto flex h-16 items-center justify-between px-4"
+  <LandingPageWrapper client:load>
+    <div class="flex min-h-screen flex-col">
+      <!-- Hero Section -->
+      <section
+        class="flex flex-1 items-center bg-gradient-to-b from-muted/50 to-background py-20"
       >
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">⚡</span>
-          <span class="text-xl font-bold">Core Starter</span>
+        <div class="container mx-auto px-4 text-center">
+          <h1 class="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
+            Build Your SaaS Faster
+            <span class="text-primary"> with Core Starter</span>
+          </h1>
+          <p
+            class="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl"
+          >
+            Production-ready foundation with authentication, subscriptions, and
+            payments already built. Skip the boilerplate and focus on your
+            unique features.
+          </p>
+
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a href="/auth/register">
+              <Button size="lg" class="min-w-[200px]">
+                Get Started Free
+              </Button>
+            </a>
+            <a href="/auth/login">
+              <Button size="lg" variant="outline" class="min-w-[200px]">
+                Sign In
+              </Button>
+            </a>
+          </div>
+
+          <p class="mt-4 text-sm text-muted-foreground">
+            7-day free trial • No credit card required
+          </p>
         </div>
-        <div class="flex items-center gap-4">
-          <a href="/auth/login" class="text-sm font-medium hover:underline">
-            Zaloguj się
-          </a>
+      </section>
+
+      <!-- Features Section -->
+      <section class="border-t py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="mb-12 text-center text-3xl font-bold">
+            Everything You Need to Launch
+          </h2>
+
+          <div class="grid gap-8 md:grid-cols-3">
+            <!-- Feature 1 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">🔐</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                Authentication & Authorization
+              </h3>
+              <p class="text-muted-foreground">
+                Complete auth system with Supabase: registration, login,
+                password reset, email verification, and protected routes.
+              </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">💳</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                Payments & Subscriptions
+              </h3>
+              <p class="text-muted-foreground">
+                Stripe integration with checkout, webhooks, customer portal,
+                trial management, and subscription lifecycle handling.
+              </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">🎨</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">Modern UI Components</h3>
+              <p class="text-muted-foreground">
+                Beautiful, accessible UI built with Tailwind CSS and shadcn/ui.
+                Responsive design that works on all devices.
+              </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">🚀</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                Built with Modern Stack
+              </h3>
+              <p class="text-muted-foreground">
+                Astro + React + TypeScript for optimal performance and developer
+                experience. SSR, islands architecture, and more.
+              </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">📊</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">User Dashboard</h3>
+              <p class="text-muted-foreground">
+                Complete dashboard with subscription status, account management,
+                and placeholders for your premium features.
+              </p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="text-center">
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
+                >
+                  <span class="text-3xl">⚡</span>
+                </div>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">Production Ready</h3>
+              <p class="text-muted-foreground">
+                Error handling, loading states, toast notifications, middleware
+                protection, and comprehensive testing setup.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Stack Section -->
+      <section class="border-t bg-muted/50 py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="mb-8 text-center text-3xl font-bold">
+            Built with Best-in-Class Technologies
+          </h2>
+          <div class="mx-auto max-w-3xl">
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Astro 5.x</p>
+                <p class="text-sm text-muted-foreground">Framework</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">React 19.x</p>
+                <p class="text-sm text-muted-foreground">UI Library</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">TypeScript</p>
+                <p class="text-sm text-muted-foreground">Language</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Tailwind CSS</p>
+                <p class="text-sm text-muted-foreground">Styling</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Supabase</p>
+                <p class="text-sm text-muted-foreground">Auth & DB</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Stripe</p>
+                <p class="text-sm text-muted-foreground">Payments</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Vitest</p>
+                <p class="text-sm text-muted-foreground">Unit Tests</p>
+              </div>
+              <div class="rounded-lg bg-card p-4 text-center shadow-sm border">
+                <p class="font-semibold">Playwright</p>
+                <p class="text-sm text-muted-foreground">E2E Tests</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="border-t py-20">
+        <div class="container mx-auto px-4 text-center">
+          <h2 class="mb-4 text-3xl font-bold">Ready to Build Your SaaS?</h2>
+          <p class="mb-8 text-lg text-muted-foreground">
+            Start with a solid foundation and launch faster. Try Core Starter
+            today.
+          </p>
           <a href="/auth/register">
-            <Button>Rozpocznij trial</Button>
+            <Button size="lg" class="min-w-[250px]"> Start Free Trial </Button>
           </a>
         </div>
-      </div>
-    </header>
+      </section>
 
-    <!-- Hero Section -->
-    <section
-      class="flex flex-1 items-center bg-gradient-to-b from-gray-50 to-white py-20"
-    >
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
-          Build Your SaaS Faster
-          <span class="text-primary"> with Core Starter</span>
-        </h1>
-        <p
-          class="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl"
-        >
-          Production-ready foundation with authentication, subscriptions, and
-          payments already built. Skip the boilerplate and focus on your unique
-          features.
-        </p>
-
+      <!-- Footer -->
+      <footer class="border-t py-8">
         <div
-          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          class="container mx-auto px-4 text-center text-sm text-muted-foreground"
         >
-          <a href="/auth/register">
-            <Button size="lg" class="min-w-[200px]"> Get Started Free </Button>
-          </a>
-          <a href="/auth/login">
-            <Button size="lg" variant="outline" class="min-w-[200px]">
-              Sign In
-            </Button>
-          </a>
+          <p>&copy; 2025 Core Starter. All rights reserved.</p>
         </div>
-
-        <p class="mt-4 text-sm text-muted-foreground">
-          7-day free trial • No credit card required
-        </p>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="border-t py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="mb-12 text-center text-3xl font-bold">
-          Everything You Need to Launch
-        </h2>
-
-        <div class="grid gap-8 md:grid-cols-3">
-          <!-- Feature 1 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">🔐</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">
-              Authentication & Authorization
-            </h3>
-            <p class="text-muted-foreground">
-              Complete auth system with Supabase: registration, login, password
-              reset, email verification, and protected routes.
-            </p>
-          </div>
-
-          <!-- Feature 2 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">💳</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">Payments & Subscriptions</h3>
-            <p class="text-muted-foreground">
-              Stripe integration with checkout, webhooks, customer portal, trial
-              management, and subscription lifecycle handling.
-            </p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">🎨</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">Modern UI Components</h3>
-            <p class="text-muted-foreground">
-              Beautiful, accessible UI built with Tailwind CSS and shadcn/ui.
-              Responsive design that works on all devices.
-            </p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">🚀</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">Built with Modern Stack</h3>
-            <p class="text-muted-foreground">
-              Astro + React + TypeScript for optimal performance and developer
-              experience. SSR, islands architecture, and more.
-            </p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">📊</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">User Dashboard</h3>
-            <p class="text-muted-foreground">
-              Complete dashboard with subscription status, account management,
-              and placeholders for your premium features.
-            </p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div class="text-center">
-            <div class="mb-4 flex justify-center">
-              <div
-                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-              >
-                <span class="text-3xl">⚡</span>
-              </div>
-            </div>
-            <h3 class="mb-2 text-xl font-semibold">Production Ready</h3>
-            <p class="text-muted-foreground">
-              Error handling, loading states, toast notifications, middleware
-              protection, and comprehensive testing setup.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section class="border-t bg-gray-50 py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="mb-8 text-center text-3xl font-bold">
-          Built with Best-in-Class Technologies
-        </h2>
-        <div class="mx-auto max-w-3xl">
-          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Astro 5.x</p>
-              <p class="text-sm text-muted-foreground">Framework</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">React 19.x</p>
-              <p class="text-sm text-muted-foreground">UI Library</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">TypeScript</p>
-              <p class="text-sm text-muted-foreground">Language</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Tailwind CSS</p>
-              <p class="text-sm text-muted-foreground">Styling</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Supabase</p>
-              <p class="text-sm text-muted-foreground">Auth & DB</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Stripe</p>
-              <p class="text-sm text-muted-foreground">Payments</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Vitest</p>
-              <p class="text-sm text-muted-foreground">Unit Tests</p>
-            </div>
-            <div class="rounded-lg bg-white p-4 text-center shadow-sm">
-              <p class="font-semibold">Playwright</p>
-              <p class="text-sm text-muted-foreground">E2E Tests</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="border-t py-20">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="mb-4 text-3xl font-bold">Ready to Build Your SaaS?</h2>
-        <p class="mb-8 text-lg text-muted-foreground">
-          Start with a solid foundation and launch faster. Try Core Starter
-          today.
-        </p>
-        <a href="/auth/register">
-          <Button size="lg" class="min-w-[250px]"> Start Free Trial </Button>
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t py-8">
-      <div
-        class="container mx-auto px-4 text-center text-sm text-muted-foreground"
-      >
-        <p>&copy; 2025 Core Starter. All rights reserved.</p>
-      </div>
-    </footer>
-  </div>
+      </footer>
+    </div>
+  </LandingPageWrapper>
 </Layout>

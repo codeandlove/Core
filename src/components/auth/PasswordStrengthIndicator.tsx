@@ -15,22 +15,22 @@ export function PasswordStrengthIndicator({
         return {
           label: "Słabe",
           width: "33.333%",
-          color: "bg-red-500",
-          textColor: "text-red-700",
+          color: "bg-red-500 dark:bg-red-400",
+          textColor: "text-red-700 dark:text-red-400",
         };
       case "medium":
         return {
           label: "Średnie",
           width: "66.666%",
-          color: "bg-yellow-500",
-          textColor: "text-yellow-700",
+          color: "bg-yellow-500 dark:bg-yellow-400",
+          textColor: "text-yellow-700 dark:text-yellow-400",
         };
       case "strong":
         return {
           label: "Mocne",
           width: "100%",
-          color: "bg-green-500",
-          textColor: "text-green-700",
+          color: "bg-green-500 dark:bg-green-400",
+          textColor: "text-green-700 dark:text-green-400",
         };
       default:
         return null;
@@ -46,7 +46,7 @@ export function PasswordStrengthIndicator({
           Siła hasła: {config.label}
         </span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
         <div
           className={`h-full transition-all duration-300 ${config.color}`}
           style={{ width: config.width }}

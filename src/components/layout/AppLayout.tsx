@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ToastProvider } from "@/contexts/ToastContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ToastContainer } from "@/components/ui/ToastContainer";
 import { SubscriptionBanner } from "@/components/SubscriptionBanner";
 
@@ -56,9 +57,11 @@ function AppLayoutContent({
 export function AppLayout(props: AppLayoutProps) {
   return (
     <AuthProvider>
-      <ToastProvider>
-        <AppLayoutContent {...props} />
-      </ToastProvider>
+      <ThemeProvider>
+        <ToastProvider>
+          <AppLayoutContent {...props} />
+        </ToastProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

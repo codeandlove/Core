@@ -96,9 +96,11 @@ export function SubscriptionBanner({
   if (!bannerInfo) return null;
 
   const colorClasses = {
-    warning: "bg-yellow-50 border-yellow-300 text-yellow-900",
-    error: "bg-red-50 border-red-300 text-red-900",
-    info: "bg-blue-50 border-blue-300 text-blue-900",
+    warning:
+      "border-yellow-600/20 bg-yellow-600/10 text-yellow-700 dark:border-yellow-400/30 dark:bg-yellow-400/10 dark:text-yellow-400",
+    error:
+      "border-red-600/20 bg-red-600/10 text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-400",
+    info: "border-blue-600/20 bg-blue-600/10 text-blue-700 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-400",
   };
 
   return (

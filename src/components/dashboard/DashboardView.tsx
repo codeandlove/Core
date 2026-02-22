@@ -34,7 +34,8 @@ function getSubscriptionInfo(profile: {
     case "trial":
       return {
         badge: "Trial Active",
-        badgeClass: "bg-blue-100 text-blue-800",
+        badgeClass:
+          "bg-blue-600/10 text-blue-700 dark:bg-blue-400/10 dark:text-blue-400",
         message: daysLeft
           ? `Your free trial expires in ${daysLeft} day${daysLeft === 1 ? "" : "s"}`
           : "Your free trial is active",
@@ -44,7 +45,8 @@ function getSubscriptionInfo(profile: {
     case "active":
       return {
         badge: "Active Subscription",
-        badgeClass: "bg-green-100 text-green-800",
+        badgeClass:
+          "bg-green-600/10 text-green-700 dark:bg-green-400/10 dark:text-green-400",
         message: "You have full access to all premium features",
         icon: "✅",
         showUpgrade: false,
@@ -52,7 +54,8 @@ function getSubscriptionInfo(profile: {
     case "expired":
       return {
         badge: "Trial Expired",
-        badgeClass: "bg-red-100 text-red-800",
+        badgeClass:
+          "bg-red-600/10 text-red-700 dark:bg-red-400/10 dark:text-red-400",
         message:
           "Your trial has ended. Upgrade to continue using premium features",
         icon: "🔒",
@@ -61,7 +64,7 @@ function getSubscriptionInfo(profile: {
     case "canceled":
       return {
         badge: "Subscription Canceled",
-        badgeClass: "bg-gray-100 text-gray-800",
+        badgeClass: "bg-muted text-muted-foreground",
         message: "Your subscription has been canceled",
         icon: "⚠️",
         showUpgrade: true,
@@ -69,7 +72,8 @@ function getSubscriptionInfo(profile: {
     case "past_due":
       return {
         badge: "Payment Required",
-        badgeClass: "bg-yellow-100 text-yellow-800",
+        badgeClass:
+          "bg-yellow-600/10 text-yellow-700 dark:bg-yellow-400/10 dark:text-yellow-400",
         message: "Your payment is past due. Please update your payment method",
         icon: "💳",
         showUpgrade: true,
@@ -77,7 +81,7 @@ function getSubscriptionInfo(profile: {
     default:
       return {
         badge: "Unknown Status",
-        badgeClass: "bg-gray-100 text-gray-800",
+        badgeClass: "bg-muted text-muted-foreground",
         message: "Unable to determine subscription status",
         icon: "❓",
         showUpgrade: false,

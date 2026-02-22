@@ -76,7 +76,7 @@ export function AccountModal({ onClose }: AccountModalProps) {
       {/* Modal */}
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- Modal content stops propagation, has keyboard support via wrapper */}
       <div
-        className="relative z-10 w-full max-w-md overflow-hidden rounded-lg bg-white shadow-2xl"
+        className="relative z-10 w-full max-w-md overflow-hidden rounded-lg bg-background shadow-2xl"
         onClick={handleModalClick}
         onKeyDown={(e) => e.stopPropagation()}
       >

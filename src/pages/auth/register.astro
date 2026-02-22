@@ -4,42 +4,47 @@
  */
 import Layout from "@/layouts/Layout.astro";
 import { AuthPageWrapper } from "@/components/auth/AuthPageWrapper";
+import { AuthPageThemeWrapper } from "@/components/auth/AuthPageThemeWrapper";
 
 const returnUrl = Astro.url.searchParams.get("returnUrl") || "/dashboard";
 ---
 
 <Layout title="Zarejestruj się - Core Starter">
-  <div
-    class="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12"
-  >
-    <div class="w-full max-w-md">
-      <div class="mb-8 text-center">
-        <a href="/" class="mb-6 inline-flex items-center gap-2">
-          <span class="text-3xl">⚡</span>
-          <span class="text-2xl font-bold">Core</span>
-        </a>
-        <h1 class="mt-6 text-3xl font-bold">Zarejestruj się</h1>
-        <p class="mt-2 text-sm text-muted-foreground">
-          Masz już konto?{" "}
-          <a
-            href="/auth/login"
-            class="font-medium text-primary hover:underline"
-          >
-            Zaloguj się
+  <AuthPageThemeWrapper client:load>
+    <div
+      class="flex min-h-screen items-center justify-center bg-muted px-4 py-12"
+    >
+      <div class="w-full max-w-md">
+        <div class="mb-8 text-center">
+          <a href="/" class="mb-6 inline-flex items-center gap-2">
+            <span class="text-3xl">⚡</span>
+            <span class="text-2xl font-bold">Core</span>
           </a>
-        </p>
-      </div>
+          <h1 class="mt-6 text-3xl font-bold">Zarejestruj się</h1>
+          <p class="mt-2 text-sm text-muted-foreground">
+            Masz już konto?{" "}
+            <a
+              href="/auth/login"
+              class="font-medium text-primary hover:underline"
+            >
+              Zaloguj się
+            </a>
+          </p>
+        </div>
 
-      <div class="mb-6 rounded-lg border bg-blue-50 p-4">
-        <p class="text-sm font-medium text-blue-900">
-          🎉 7-dniowy trial za darmo
-        </p>
-        <p class="mt-1 text-xs text-blue-700">
-          Nie wymagamy karty kredytowej. Pełny dostęp przez pierwszy tydzień.
-        </p>
-      </div>
+        <div
+          class="mb-6 rounded-lg border border-blue-600/20 bg-blue-600/10 p-4 dark:border-blue-400/30 dark:bg-blue-400/10"
+        >
+          <p class="text-sm font-medium text-blue-700 dark:text-blue-400">
+            🎉 7-dniowy trial za darmo
+          </p>
+          <p class="mt-1 text-xs text-blue-700 dark:text-blue-400">
+            Nie wymagamy karty kredytowej. Pełny dostęp przez pierwszy tydzień.
+          </p>
+        </div>
 
-      <AuthPageWrapper client:load mode="register" returnUrl={returnUrl} />
+        <AuthPageWrapper client:load mode="register" returnUrl={returnUrl} />
+      </div>
     </div>
-  </div>
+  </AuthPageThemeWrapper>
 </Layout>

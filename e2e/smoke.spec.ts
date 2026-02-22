@@ -35,7 +35,9 @@ test.describe("Smoke Tests - Core Pages", () => {
     // Should have email input
     await expect(page.locator('input[name="email"]')).toBeVisible();
   });
-  test("should redirect to login when accessing dashboard without auth", async ({ page }) => {
+  test("should redirect to login when accessing dashboard without auth", async ({
+    page,
+  }) => {
     await page.goto("/dashboard");
     // Should redirect to login
     await page.waitForURL(/\/auth\/login/);
@@ -68,7 +70,9 @@ test.describe("Smoke Tests - Core Pages", () => {
     // Should return 404
     expect(response?.status()).toBe(404);
   });
-  test("should load without console errors on landing page", async ({ page }) => {
+  test("should load without console errors on landing page", async ({
+    page,
+  }) => {
     const errors: string[] = [];
     page.on("console", (msg) => {
       if (msg.type() === "error") {
@@ -79,7 +83,7 @@ test.describe("Smoke Tests - Core Pages", () => {
     await page.waitForLoadState("networkidle");
     // Filter out non-critical errors (like favicon 404)
     const criticalErrors = errors.filter(
-      (error) => !error.includes("favicon") && !error.includes("404")
+      (error) => !error.includes("favicon") && !error.includes("404"),
     );
     expect(criticalErrors).toHaveLength(0);
   });

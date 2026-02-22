@@ -24,12 +24,12 @@ export default function CheckoutLoader({ priceId }: CheckoutLoaderProps) {
 
   if (error) {
     return (
-      <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
-        <AlertCircle className="mx-auto mb-4 h-12 w-12 text-red-600" />
-        <h2 className="mb-2 text-xl font-semibold text-gray-900">
+      <div className="rounded-lg border border-red-600/20 bg-red-600/10 p-8 text-center dark:border-red-400/30 dark:bg-red-400/10">
+        <AlertCircle className="mx-auto mb-4 h-12 w-12 text-red-600 dark:text-red-400" />
+        <h2 className="mb-2 text-xl font-semibold text-foreground">
           Wystąpił błąd
         </h2>
-        <p className="mb-6 text-sm text-gray-600">{error}</p>
+        <p className="mb-6 text-sm text-muted-foreground">{error}</p>
         <Button onClick={initiateCheckout} disabled={isLoading}>
           Spróbuj ponownie
         </Button>
@@ -38,15 +38,15 @@ export default function CheckoutLoader({ priceId }: CheckoutLoaderProps) {
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-8 text-center shadow-sm">
-      <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-blue-600" />
-      <h2 className="mb-2 text-xl font-semibold text-gray-900">
+    <div className="rounded-lg border border-border bg-card p-8 text-center shadow-sm">
+      <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-blue-600 dark:text-blue-400" />
+      <h2 className="mb-2 text-xl font-semibold text-foreground">
         Przygotowujemy płatność...
       </h2>
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-muted-foreground">
         Zaraz zostaniesz przekierowany do bezpiecznej strony płatności.
       </p>
-      <p className="mt-4 text-xs text-gray-500">
+      <p className="mt-4 text-xs text-muted-foreground">
         Może to potrwać kilka sekund. Nie odświeżaj strony.
       </p>
     </div>

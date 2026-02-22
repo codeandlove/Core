@@ -113,9 +113,13 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* Smooth color transitions for theme switching - can be disabled if performance issues */
+    transition:
+      background-color 200ms ease-in-out,
+      color 200ms ease-in-out,
+      border-color 200ms ease-in-out;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
-

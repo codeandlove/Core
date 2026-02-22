@@ -5,7 +5,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 ## Test Files
 
 ### 🟢 `smoke.spec.ts` - Basic Smoke Tests
+
 **Requirements:** None (just needs app running)
+
 - Verifies pages load correctly
 - Tests routing and redirects
 - Checks responsive design
@@ -14,7 +16,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 **Run:** `npm run test:e2e -- --project=smoke-tests`
 
 ### 🟡 `auth.spec.ts` - Authentication Tests
+
 **Requirements:** Supabase running + test users
+
 - User registration
 - Login/logout flows
 - Password reset
@@ -22,7 +26,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 - Session management
 
 ### 🟡 `stripe.spec.ts` - Payment & Subscription Tests
+
 **Requirements:** Supabase + Stripe configured
+
 - Checkout flow
 - Subscription management
 - Trial handling
@@ -30,7 +36,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 - Webhook handling (skipped - requires setup)
 
 ### 🟡 `dashboard.spec.ts` - Dashboard Tests
+
 **Requirements:** Supabase + authenticated users
+
 - Dashboard layout
 - User menu functionality
 - Settings page
@@ -38,7 +46,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 - Responsive design
 
 ### 🟡 `landing.spec.ts` - Landing Page Tests
+
 **Requirements:** App running (partial Supabase)
+
 - Hero section
 - Features section
 - Pricing section
@@ -47,7 +57,9 @@ This directory contains End-to-End tests for Core Starter using Playwright.
 - Responsive design
 
 ### `helpers.ts` - Test Utilities
+
 Helper functions for E2E tests:
+
 - Login/logout helpers
 - User credentials
 - Mock functions
@@ -58,11 +70,13 @@ Helper functions for E2E tests:
 ## Quick Start
 
 ### Run Smoke Tests (No Setup Required)
+
 ```bash
 npm run test:e2e -- --project=smoke-tests
 ```
 
 ### Run All Tests (Requires Setup)
+
 ```bash
 # 1. Start Supabase
 supabase start
@@ -76,11 +90,13 @@ npm run test:e2e
 ## Prerequisites for Full Tests
 
 ### 1. Supabase Running Locally
+
 ```bash
 supabase start
 ```
 
 Verify it's running:
+
 ```bash
 curl http://127.0.0.1:54321/rest/v1/
 ```
@@ -89,13 +105,13 @@ curl http://127.0.0.1:54321/rest/v1/
 
 You need to create test users with different subscription statuses:
 
-| Email | Password | Subscription Status | Purpose |
-|-------|----------|-------------------|---------|
-| `user@example.com` | `ValidPassword123!` | free | General user tests |
-| `free-user@example.com` | `ValidPassword123!` | free | Free tier tests |
-| `premium-user@example.com` | `ValidPassword123!` | active | Premium feature tests |
-| `trial-user@example.com` | `ValidPassword123!` | trial | Trial period tests |
-| `expired-trial@example.com` | `ValidPassword123!` | trial_expired | Expired trial tests |
+| Email                       | Password            | Subscription Status | Purpose               |
+| --------------------------- | ------------------- | ------------------- | --------------------- |
+| `user@example.com`          | `ValidPassword123!` | free                | General user tests    |
+| `free-user@example.com`     | `ValidPassword123!` | free                | Free tier tests       |
+| `premium-user@example.com`  | `ValidPassword123!` | active              | Premium feature tests |
+| `trial-user@example.com`    | `ValidPassword123!` | trial               | Trial period tests    |
+| `expired-trial@example.com` | `ValidPassword123!` | trial_expired       | Expired trial tests   |
 
 **TODO:** Create script to seed these users automatically.
 
@@ -118,11 +134,13 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 ## Running Tests
 
 ### All Tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Specific Project
+
 ```bash
 npm run test:e2e -- --project=smoke-tests
 npm run test:e2e -- --project=auth-tests
@@ -132,22 +150,26 @@ npm run test:e2e -- --project=landing-tests
 ```
 
 ### Interactive Mode (UI)
+
 ```bash
 npm run test:e2e:ui
 ```
 
 ### Debug Mode
+
 ```bash
 npm run test:e2e:debug
 ```
 
 ### Specific Test File
+
 ```bash
 npm run test:e2e -- smoke.spec.ts
 npm run test:e2e -- auth.spec.ts
 ```
 
 ### Headed Mode (See Browser)
+
 ```bash
 npm run test:e2e -- --headed
 ```
@@ -159,6 +181,7 @@ npm run test:e2e -- --headed
 See `playwright.config.ts` in project root.
 
 **Key settings:**
+
 - **Timeout:** 60 seconds per test
 - **Workers:** 2 (to avoid overwhelming local services)
 - **Auto-start:** Dev server starts automatically
@@ -170,35 +193,43 @@ See `playwright.config.ts` in project root.
 ## Troubleshooting
 
 ### Tests Time Out
+
 **Problem:** Tests can't connect to app
 
 **Solutions:**
+
 1. Verify app is running: `curl http://localhost:3000`
 2. Check Supabase is running: `supabase status`
 3. Increase timeout in `playwright.config.ts`
 
 ### Authentication Tests Fail
+
 **Problem:** Can't login or create users
 
 **Solutions:**
+
 1. Check Supabase is running
 2. Verify test users exist in database
 3. Check `.env` has correct Supabase keys
 4. Verify JWT secrets match
 
 ### Stripe Tests Fail
+
 **Problem:** Checkout or webhook tests fail
 
 **Solutions:**
+
 1. Verify Stripe keys in `.env`
-2. Use test mode keys (sk_test_... / pk_test_...)
+2. Use test mode keys (sk*test*... / pk*test*...)
 3. Check webhook secret is configured
 4. For webhook tests - may need Stripe CLI
 
 ### Database Connection Errors
+
 **Problem:** Can't connect to database
 
 **Solutions:**
+
 1. Start Supabase: `supabase start`
 2. Check connection: `curl http://127.0.0.1:54321/rest/v1/`
 3. Verify `.env` has correct URL
@@ -209,12 +240,14 @@ See `playwright.config.ts` in project root.
 ## CI/CD Integration
 
 Tests are configured to work in CI with:
+
 - `npm run preview` instead of dev server
 - Build step before tests
 - 2 retries on failure
 - Strict mode enabled
 
 **GitHub Actions example:**
+
 ```yaml
 - name: Start Supabase
   run: supabase start
@@ -242,12 +275,12 @@ test.describe("Feature Name", () => {
     test("should do something", async ({ page }) => {
       // Arrange
       await page.goto("/some-page");
-      
+
       // Act
-      await page.click('button');
-      
+      await page.click("button");
+
       // Assert
-      await expect(page.locator('result')).toBeVisible();
+      await expect(page.locator("result")).toBeVisible();
     });
   });
 });
@@ -287,4 +320,3 @@ test.describe("Feature Name", () => {
 - 🐛 Check `E2E_TEST_DIAGNOSIS.md` for common issues
 - 💬 See test patterns in existing spec files
 - 🔍 Use debug mode: `npm run test:e2e:debug`
-

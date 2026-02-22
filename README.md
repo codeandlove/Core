@@ -54,7 +54,7 @@ Perfect for rapid prototyping, MVPs, and production applications.
   - Tailwind CSS for styling
   - Toast notifications
   - Loading states and error handling
-  - Dark mode ready
+  - Dark mode with theme toggle and persistence
 
 - **⚡ Developer Experience**
   - TypeScript for type safety
@@ -66,18 +66,18 @@ Perfect for rapid prototyping, MVPs, and production applications.
 
 ## Tech Stack
 
-| Category | Technology | Version |
-|----------|-----------|---------|
-| **Framework** | Astro | 5.x |
-| **UI Library** | React | 19.x |
-| **Language** | TypeScript | 5.8.x |
-| **Styling** | Tailwind CSS | 4.x |
-| **Components** | shadcn/ui | Latest |
-| **Authentication** | Supabase Auth | Latest |
-| **Database** | Supabase PostgreSQL | Latest |
-| **Payments** | Stripe | Latest |
-| **Testing** | Vitest + Playwright | Latest |
-| **Package Manager** | npm | Latest |
+| Category            | Technology          | Version |
+| ------------------- | ------------------- | ------- |
+| **Framework**       | Astro               | 5.x     |
+| **UI Library**      | React               | 19.x    |
+| **Language**        | TypeScript          | 5.8.x   |
+| **Styling**         | Tailwind CSS        | 4.x     |
+| **Components**      | shadcn/ui           | Latest  |
+| **Authentication**  | Supabase Auth       | Latest  |
+| **Database**        | Supabase PostgreSQL | Latest  |
+| **Payments**        | Stripe              | Latest  |
+| **Testing**         | Vitest + Playwright | Latest  |
+| **Package Manager** | npm                 | Latest  |
 
 ---
 
@@ -244,6 +244,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 ### How to Get API Keys
 
 **Supabase:**
+
 1. Go to [supabase.com](https://supabase.com)
 2. Create a new project
 3. Go to Settings > API
@@ -251,6 +252,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 5. Copy `service_role` key (keep secret!)
 
 **Stripe:**
+
 1. Go to [stripe.com](https://stripe.com)
 2. Create an account (use test mode)
 3. Go to Developers > API Keys
@@ -289,26 +291,31 @@ npm run test:e2e:debug   # Debug E2E tests
 These systems are **production-ready** and should **not be modified** unless you have a specific reason:
 
 ### 1. Authentication System
+
 - **Files**: `src/components/auth/*`, `src/contexts/AuthContext.tsx`, `src/pages/auth/*`
 - **What it does**: Complete user registration, login, password reset, email verification
 - **Status**: ✅ Production-ready
 
 ### 2. Subscription Management
+
 - **Files**: `src/services/subscription.service.ts`, `src/pages/api/subscriptions/*`
 - **What it does**: Stripe checkout, trial management, subscription lifecycle
 - **Status**: ✅ Production-ready
 
 ### 3. Webhook Handling
+
 - **Files**: `src/services/webhook.service.ts`, `src/pages/api/webhooks/stripe.ts`
 - **What it does**: Real-time subscription updates from Stripe
 - **Status**: ✅ Production-ready
 
 ### 4. Database Schema
+
 - **Files**: `supabase/migrations/*`
 - **What it does**: User profiles, subscription data, audit trails
 - **Status**: ✅ Production-ready
 
 ### 5. Middleware
+
 - **Files**: `src/middleware/index.ts`
 - **What it does**: Route protection, authentication checks
 - **Status**: ✅ Production-ready
@@ -326,11 +333,13 @@ These systems are **production-ready** and should **not be modified** unless you
 Replace the placeholder section with your main feature:
 
 ```tsx
-{/* Premium Feature Placeholder */}
+{
+  /* Premium Feature Placeholder */
+}
 <Card className="mt-6 p-8">
   {/* REPLACE THIS SECTION WITH YOUR FEATURE */}
   <YourCustomFeature />
-</Card>
+</Card>;
 ```
 
 #### 2. **New Protected Routes**
@@ -366,12 +375,12 @@ import { getAuthUidAndToken } from "@/lib/auth";
 
 export const GET: APIRoute = async ({ request }) => {
   const { uid, token } = await getAuthUidAndToken(request);
-  
+
   // Your API logic here
-  
+
   return new Response(JSON.stringify({ data: result }), {
     status: 200,
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
   });
 };
 ```
@@ -385,11 +394,11 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export function PremiumFeature() {
   const { profile } = useAuth();
-  
+
   if (profile?.subscription_status !== "active") {
     return <UpgradePrompt />;
   }
-  
+
   return <YourPremiumContent />;
 }
 ```
@@ -421,6 +430,7 @@ npm run test:coverage     # With coverage
 ```
 
 **Test Structure:**
+
 - `src/test/setup.ts` - Global test configuration
 - `src/test/mocks/` - Mock Service Worker handlers
 - `*.test.ts` - Co-located with source files
@@ -436,6 +446,7 @@ npm run test:e2e:debug    # Debug mode
 ```
 
 **Test Files:**
+
 - `e2e/auth.spec.ts` - Registration, login, logout, password reset
 - `e2e/stripe.spec.ts` - Checkout, subscriptions, webhooks
 - `e2e/dashboard.spec.ts` - Dashboard layout, navigation, settings
@@ -447,6 +458,65 @@ npm run test:e2e:debug    # Debug mode
 **Unit Tests:** Create `*.test.ts` files next to your source code.
 
 **E2E Tests:** Add new spec files in `e2e/` directory following existing patterns.
+
+---
+
+## Theme System
+
+The application supports light and dark color modes with automatic system preference detection and user preference persistence.
+
+### Using Theme in Components
+
+```tsx
+import { useTheme } from "@/contexts/ThemeContext";
+
+function MyComponent() {
+  const { theme, toggleTheme, setTheme } = useTheme();
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+    </div>
+  );
+}
+```
+
+### Theme API
+
+The `useTheme()` hook provides:
+
+- `theme: "light" | "dark"` - Current active theme
+- `setTheme(theme)` - Set theme explicitly
+- `toggleTheme()` - Toggle between light and dark
+
+### Color Variables
+
+All colors use CSS variables defined in `src/styles/global.css`. Always use CSS variables instead of hardcoded colors:
+
+```tsx
+// ✅ Good - Uses theme variables
+<div className="bg-background text-foreground border-border">
+
+// ❌ Bad - Hardcoded colors
+<div className="bg-white text-black border-gray-200">
+```
+
+### Theme Toggle Placement
+
+The `ThemeToggle` component can be placed anywhere:
+
+```tsx
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
+
+<ThemeToggle />;
+```
+
+### Theme Persistence
+
+Theme preference is automatically saved to `localStorage` and persists across sessions. On first visit, the app detects system color scheme preference (`prefers-color-scheme`).
 
 ---
 
@@ -463,6 +533,7 @@ Output will be in `dist/` directory.
 ### Environment Setup
 
 Ensure all production environment variables are set:
+
 - Use production Supabase project
 - Use live Stripe keys (not test mode)
 - Set up Stripe webhook endpoint pointing to your domain

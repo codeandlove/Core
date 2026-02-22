@@ -22,10 +22,10 @@ export function PasswordResetPageWrapper({
   // Handle reset password error state (expired/invalid token)
   if (mode === "reset" && errorType) {
     return (
-      <div className="rounded-lg border bg-white p-8 shadow-sm">
+      <div className="rounded-lg border bg-card p-8 shadow-sm">
         <div
           role="alert"
-          className="rounded-md bg-red-50 border border-red-200 p-4 text-sm text-red-800"
+          className="rounded-md border border-red-600/20 bg-red-600/10 p-4 text-sm text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-400"
         >
           <p className="font-medium">Link wygasł lub jest nieprawidłowy</p>
           <p className="mt-1">
