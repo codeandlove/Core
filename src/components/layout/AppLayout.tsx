@@ -19,6 +19,8 @@ interface AppLayoutProps {
    * - true: Scrollable page content - for Event Detail and other content pages
    */
   scrollable?: boolean;
+  showSidebar?: boolean;
+  sidebarContent?: ReactNode;
 }
 
 function AppLayoutContent({
@@ -26,6 +28,8 @@ function AppLayoutContent({
   header,
   showSubscriptionBanner = true,
   scrollable = true,
+  showSidebar = false,
+  sidebarContent,
 }: AppLayoutProps) {
   const { profile } = useAuth();
 
@@ -41,6 +45,7 @@ function AppLayoutContent({
     : "flex h-screen flex-col overflow-hidden bg-background";
 
   const mainClass = scrollable ? "flex-1" : "flex-1 overflow-hidden";
+  const contentWrapperClass = showSidebar ? "flex flex-1 overflow-hidden" : "";
 
   return (
     <div className={containerClass}>
@@ -48,7 +53,14 @@ function AppLayoutContent({
       {showSubscriptionBanner && profile && (
         <SubscriptionBanner profile={profile} onUpgrade={handleUpgrade} />
       )}
-      <main className={mainClass}>{children}</main>
+      {showSidebar ? (
+        <div className={contentWrapperClass}>
+          {sidebarContent}
+          <main className={mainClass}>{children}</main>
+        </div>
+      ) : (
+        <main className={mainClass}>{children}</main>
+      )}
       <ToastContainer />
     </div>
   );

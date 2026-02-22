@@ -28,18 +28,18 @@ describe("ThemeToggle", () => {
     document.documentElement.classList.remove("dark");
   });
 
-  it("should render toggle button", () => {
+  it("should render toggle button", async () => {
     render(
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>,
     );
 
-    const button = screen.getByRole("button");
+    const button = await screen.findByRole("button");
     expect(button).toBeInTheDocument();
   });
 
-  it("should show Moon icon in light mode", () => {
+  it("should show Moon icon in light mode", async () => {
     localStorage.setItem("theme-preference", "light");
 
     render(
@@ -48,12 +48,12 @@ describe("ThemeToggle", () => {
       </ThemeProvider>,
     );
 
-    const button = screen.getByLabelText("Switch to dark mode");
+    const button = await screen.findByLabelText("Switch to dark mode");
     expect(button).toBeInTheDocument();
     expect(button).toHaveAttribute("aria-pressed", "false");
   });
 
-  it("should show Sun icon in dark mode", () => {
+  it("should show Sun icon in dark mode", async () => {
     localStorage.setItem("theme-preference", "dark");
 
     render(
@@ -62,12 +62,12 @@ describe("ThemeToggle", () => {
       </ThemeProvider>,
     );
 
-    const button = screen.getByLabelText("Switch to light mode");
+    const button = await screen.findByLabelText("Switch to light mode");
     expect(button).toBeInTheDocument();
     expect(button).toHaveAttribute("aria-pressed", "true");
   });
 
-  it("should toggle theme on click", () => {
+  it("should toggle theme on click", async () => {
     localStorage.setItem("theme-preference", "light");
 
     render(
@@ -76,7 +76,7 @@ describe("ThemeToggle", () => {
       </ThemeProvider>,
     );
 
-    const button = screen.getByRole("button");
+    const button = await screen.findByRole("button");
     const initialLabel = button.getAttribute("aria-label");
 
     fireEvent.click(button);
@@ -86,20 +86,20 @@ describe("ThemeToggle", () => {
     expect(newLabel).toBe("Switch to light mode");
   });
 
-  it("should be keyboard accessible", () => {
+  it("should be keyboard accessible", async () => {
     render(
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>,
     );
 
-    const button = screen.getByRole("button");
+    const button = await screen.findByRole("button");
     button.focus();
 
     expect(button).toHaveFocus();
   });
 
-  it("should have proper ARIA attributes", () => {
+  it("should have proper ARIA attributes", async () => {
     localStorage.setItem("theme-preference", "light");
 
     render(
@@ -108,14 +108,14 @@ describe("ThemeToggle", () => {
       </ThemeProvider>,
     );
 
-    const button = screen.getByRole("button");
+    const button = await screen.findByRole("button");
 
     expect(button).toHaveAttribute("aria-label");
     expect(button).toHaveAttribute("aria-pressed");
     expect(button).toHaveAttribute("type", "button");
   });
 
-  it("should update aria-pressed when theme changes", () => {
+  it("should update aria-pressed when theme changes", async () => {
     localStorage.setItem("theme-preference", "light");
 
     render(
@@ -124,7 +124,7 @@ describe("ThemeToggle", () => {
       </ThemeProvider>,
     );
 
-    const button = screen.getByRole("button");
+    const button = await screen.findByRole("button");
     expect(button).toHaveAttribute("aria-pressed", "false");
 
     fireEvent.click(button);

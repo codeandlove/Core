@@ -5,9 +5,19 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <button
