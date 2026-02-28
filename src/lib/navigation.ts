@@ -25,4 +25,3 @@ export function isActiveRoute(itemHref: string, currentPath: string): boolean {
 
   return currentPath.startsWith(itemHref);
 }
-

@@ -18,4 +18,3 @@ export interface SidebarConfig {
   collapsible?: boolean;
   defaultCollapsed?: boolean;
 }
-

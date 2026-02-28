@@ -68,12 +68,30 @@ export default tseslint.config(
   eslintPluginAstro.configs["flat/recommended"],
   eslintPluginPrettier,
   {
+    // Node.js scripts — enable node globals, relax console/process rules
+    files: ["scripts/**/*.{js,mjs,ts}"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        Buffer: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+      },
+    },
+    rules: {
+      "no-console": "off",
+      "no-undef": "off",
+    },
+  },
+  {
     // Ignore CommonJS config files and files with parsing issues
     ignores: [
       "ecosystem.config.cjs",
       ".prettierrc.cjs",
       "src/layouts/Layout.astro",
       "src/pages/checkout/success.astro",
+      "scripts/**",
     ],
   },
 );

@@ -12,6 +12,27 @@ import { MobileSidebarToggle } from "@/components/layout/MobileSidebarToggle";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { getDefaultDashboardNavigation } from "@/lib/navigation";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+
+/**
+ * Auth guard — rendered INSIDE AppLayout so AuthProvider is available.
+ * DashboardPageWrapper itself must NOT call useAuth().
+ */
+function DashboardContent() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      window.location.href = "/auth/login";
+    }
+  }, [isLoading, isAuthenticated]);
+
+  if (isLoading || !isAuthenticated) {
+    return null;
+  }
+
+  return <DashboardView />;
+}
 
 export function DashboardPageWrapper() {
   const { isCollapsed, isMobile, toggle } = useSidebarState();
@@ -38,10 +59,7 @@ export function DashboardPageWrapper() {
         <Header
           leftContent={
             isMobile ? (
-              <MobileSidebarToggle
-                isOpen={!isCollapsed}
-                onToggle={toggle}
-              />
+              <MobileSidebarToggle isOpen={!isCollapsed} onToggle={toggle} />
             ) : undefined
           }
           avatarMenu={<AvatarMenu />}
@@ -51,7 +69,7 @@ export function DashboardPageWrapper() {
       showSidebar={true}
       sidebarContent={sidebar}
     >
-      <DashboardView />
+      <DashboardContent />
     </AppLayout>
   );
 }

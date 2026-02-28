@@ -9,7 +9,7 @@
 export const ALLOWED_DOMAINS =
   import.meta.env.MODE === "production"
     ? [
-        "https://bsgpw.codeandlove.pl",
+        "https://domain.pl",
         // Add more production domains here
       ]
     : [
@@ -17,6 +17,7 @@ export const ALLOWED_DOMAINS =
         "http://localhost:3000",
         "http://127.0.0.1:4321",
         "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
       ];
 
 /**

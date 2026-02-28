@@ -1,0 +1,16 @@
+---
+/**
+ * Profile - Delete account page
+ * Protected: requires authentication (middleware)
+ */
+import Layout from "@/layouts/Layout.astro";
+import { ProfilePageWrapper } from "@/components/profile/ProfilePageWrapper";
+---
+
+<Layout title="Usuń konto - Core Starter">
+  <ProfilePageWrapper
+    client:load
+    currentPath="/profile/delete-account"
+    section="delete-account"
+  />
+</Layout>

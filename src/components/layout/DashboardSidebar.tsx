@@ -49,7 +49,7 @@ export function DashboardSidebar({
         aria-label="Dashboard navigation"
       >
         <nav className="flex h-full flex-col p-4">
-          <ul className="space-y-2" role="list">
+          <ul className="space-y-2">
             {items.map((item) => {
               const isActive = isActiveRoute(item.href, currentPath);
               const Icon = item.icon || Home;
@@ -90,4 +90,3 @@ export function DashboardSidebar({
     </>
   );
 }
-

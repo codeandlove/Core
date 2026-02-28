@@ -1,0 +1,16 @@
+---
+/**
+ * Profile - Marketing consents page
+ * Protected: requires authentication (middleware)
+ */
+import Layout from "@/layouts/Layout.astro";
+import { ProfilePageWrapper } from "@/components/profile/ProfilePageWrapper";
+---
+
+<Layout title="Zgody marketingowe - Core Starter">
+  <ProfilePageWrapper
+    client:load
+    currentPath="/profile/consents"
+    section="consents"
+  />
+</Layout>

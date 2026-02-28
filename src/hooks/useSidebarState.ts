@@ -51,4 +51,3 @@ export function useSidebarState(defaultCollapsed = false) {
     setIsCollapsed,
   };
 }
-

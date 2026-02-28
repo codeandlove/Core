@@ -67,6 +67,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     let userId = null;
 
     if (url.pathname.startsWith("/api/")) {
+      // API routes — token from Authorization header
       const authHeader = context.request.headers.get("Authorization");
       const token = authHeader?.replace("Bearer ", "");
 
